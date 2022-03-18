@@ -1,21 +1,12 @@
-import { useContext } from 'react';
+import { createContext, useState } from 'react';
 
-import ProductCard from '../../components/product-card/product-card.component';
+export const CartContext = createContext({
+  isCartOpen: false,
+  setIsOpen: () => {},
+});
 
-import { ProductsContext } from '../../contexts/products.context';
-
-import './shop.styles.scss';
-
-const Shop = () => {
-  const { products } = useContext(ProductsContext);
-
-  return (
-    <div className='products-container'>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
-  );
+export const CartProvider = ({ children }) => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const value = { isCartOpen, setIsCartOpen };
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
-
-export default Shop;
