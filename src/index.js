@@ -4,6 +4,8 @@ import {BrowserRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './store/store';
+import {Elements} from "@stripe/react-stripe-js";
+import { stripePromise } from './utils/stripe/stripe.utils';
 import './index.scss';
 
 const rootElement = document.getElementById("root");
@@ -12,7 +14,9 @@ render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-            <App />
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
