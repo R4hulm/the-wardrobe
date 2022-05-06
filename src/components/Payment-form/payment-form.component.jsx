@@ -34,8 +34,8 @@ const PaymentForm = () => {
         });
         console.log(response);
 
-        const clientSecret = response.paymentIntent.client_secret;
-        
+        const clientSecret = `${response.paymentIntent.client_secret}`;
+        console.log(clientSecret);
     
         const paymentResult = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
@@ -44,6 +44,7 @@ const PaymentForm = () => {
                     name: currentUser ? currentUser.displayName : 'Guest',
                 }
             }
+            
         });
         
         setIsProcessingPayment(false);
